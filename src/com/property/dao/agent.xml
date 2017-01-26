@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="agent">
+    <typeAlias alias="Agent" type="com.property.entity.Agent" />
+    <sql id="agent_sel">
+      SELECT
+        M.ID  as id,
+		M.NAME as name, 
+		M.type as type, 
+		M.address as address,
+		M.suburb as suburb,
+		M.state as state,
+			M.postCode as postCode,
+		M.mobile as mobile,
+		M.email as email,
+		M.note as note,
+		M.create_time as createTime,
+	    M.create_time as updateTime		
+      FROM r_agent M
+    </sql>
+
+
+ <select id="listAgentAll" parameterClass="int" resultClass="Agent">
+        <include refid='agent_sel' />
+	    
+	    ORDER BY  M.name DESC
+
+    </select>
+
+
+    <select id="listAgent" parameterClass="Agent" resultClass="Agent">
+        <include refid='agent_sel' />
+	    WHERE 
+	      1 = 1 
+	      <isNotEmpty property="id">
+	        AND M.id=#id# 
+	      </isNotEmpty> 
+	      <isNotEmpty property="name">
+	         AND M.name like #name# 
+	      </isNotEmpty> 
+	      <isNotEmpty property="mobile">
+	        AND M.mobile like #mobile# 
+	      </isNotEmpty> 
+	   
+	    ORDER BY  M.name DESC
+
+    </select>
+   
+    <delete id="deleteAgent" parameterClass="int">
+         DELETE FROM r_agent
+	     WHERE ID = #value#
+    </delete>
+    <insert id="addAgent" parameterClass="Agent">
+      <selectKey keyProperty="id" type="post" resultClass="int">  
+	     SELECT LAST_INSERT_ID() AS value  
+	  </selectKey> 
+      INSERT INTO r_agent(
+		NAME,        
+		type,     
+		address,
+		suburb,  
+		state,       
+		postCode,       
+		mobile,         
+		email, 
+		note,
+		create_time,
+		update_time
+        )
+       VALUES(
+		#name#,
+		#type:NUMERIC#,
+		#address#,
+		#suburb:NUMERIC#,
+		#state:NUMERIC#,
+		#postCode#,
+		#mobile#,
+		#email#,
+		#note#,
+		SYSDATE(),
+		SYSDATE()
+       )
+    </insert>
+    <update id="modifyAgent" parameterClass="Agent">
+      UPDATE  r_agent
+	  SET
+		NAME=#name#,
+		type=#type#,
+		address=#address#,
+		suburb=#suburb#,
+		state=#state#,
+		postCode=#postCode#,
+		mobile=#mobile#,
+		email=#email#,
+		note=#note#,
+		UPDATE_TIME=SYSDATE()
+      WHERE
+         ID=#id#
+    </update>
+</sqlMap>

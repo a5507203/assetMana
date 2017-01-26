@@ -1,0 +1,60 @@
+
+#sidebar { 
+	width:150px;
+	float:left;
+	background-color:#eeeeff;
+	}
+
+#sidebar ul {
+	list-style: none;
+}
+
+#sidebar a, #sidebar h3.cat {
+	width: 130px;
+	display: block;
+	padding: 3px 5px 3px 0px;
+	background: url(../images/tab_small.png) center right no-repeat;
+	margin: 5px 0;
+	text-decoration: none;
+}
+
+#sidebar a {
+	color: #000000;
+}
+
+#sidebar a.big, #sidebar h3.cat {
+	background: url(../images/tab_big.png) center right no-repeat;
+	padding: 4px 5px 4px 0px;
+	margin: 8px 0;
+}
+
+#sidebar h3 {
+	font-size: 13px;
+}
+
+#sidebar h3.cat {
+	color: #000000
+	
+}
+
+#sidebar a.big {
+	color: #fff;
+}
+
+#sidebar a.good {
+    width: 130px;
+    display: block;
+    padding: 3px 5px 3px 0px;
+    background: url(../images/tab_small2.png) center right no-repeat;
+    margin: 5px 0;
+    text-decoration: none;
+}
+
+#sidebar a.selected {
+    width: 130px;
+    display: block;
+    padding: 3px 5px 3px 0px;
+    background: url(../images/tab_big.png) center right no-repeat;
+    margin: 5px 0;
+    text-decoration: none;
+}
